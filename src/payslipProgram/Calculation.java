@@ -5,35 +5,30 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class Main {
+public class Calculation {
 	
 	static class Employee {
 		String firstName;
 		String lastName;
 		Double salary;
 		Double superRate;
-		LocalDate startDate;
+		String startDate;
 
 		Employee (String firstname, String lastname, String salary, String superrate, String startdate) {
 			this.firstName = firstname;
 			this.lastName = lastname;
 			this.salary = Double.parseDouble(salary);
 			this.superRate = Double.parseDouble(superrate);
-			DateTimeFormatter df = DateTimeFormatter.ofPattern( "dd/MM/uuuu" ) ;
-			this.startDate = LocalDate.parse( startdate , df ) ;
+			this.startDate = startdate ;
 		}
 	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-		String inputFile = "src/payslip-input.csv";
+	
+	public Calculation(String path) {
+		
+		String inputFile = path;
 		String outputFile = "src/payslip-output.csv";
 		String line = "";
 		String splitBy = ",";
@@ -53,6 +48,7 @@ public class Main {
 
 		try
 		{
+			new GUI();
 			//read input file
 			BufferedReader br = new BufferedReader(new FileReader(inputFile));
 			Boolean firstLine = true;
@@ -100,7 +96,7 @@ public class Main {
 				
 				bw.write(e.firstName + " " + e.lastName);
 				bw.write(",");
-				bw.write(e.startDate.getMonth().toString());
+				bw.write(e.startDate);
 				bw.write(",");
 				bw.write(Integer.toString(grossIncome));
 				bw.write(",");
