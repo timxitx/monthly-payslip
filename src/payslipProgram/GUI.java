@@ -2,16 +2,19 @@ package payslipProgram;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import payslipProgram.Calculation;
 
 public class GUI implements ActionListener {
 	
 	String filePath = "";
+	String outputFile = "src/payslip-output.csv";
 	
 	public GUI() {
 		JFrame frame = new JFrame("Montly Payslip Program");
@@ -42,7 +45,13 @@ public class GUI implements ActionListener {
 		int returnVal = chooser.showOpenDialog(null);
 		if(returnVal == JFileChooser.APPROVE_OPTION) {
 			filePath = chooser.getSelectedFile().toString();
-			new Calculation(filePath);
+			new GUI();
+			//read input file
+			IO io = new IO();
+			io.FileReader(filePath);
+			//output
+			io.FileWriter(outputFile);
+			System.out.println("Finished!");
 		}
 		
 	}
