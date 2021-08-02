@@ -13,9 +13,9 @@ To run it:
 
 
 How to run it:
-Option 1. Open Eclipse, select "GUI.java" and click run
-Option 2. Open terminal, go to src/payslipProgram, run "javac Calculation.java Employee.java, GUI.java, IO.java". Go back to payslipProgram folder run "java payslipProgram.GUI".
-(You can choose your csv file use GUI and the output csv file will be generated into monthly-payslip/src folder).
+- Option 1. Open Eclipse, select "GUI.java" and click run
+- Option 2. Open terminal, go to src/payslipProgram, run "javac Calculation.java Employee.java, GUI.java, IO.java". Go back to payslipProgram folder run "java payslipProgram.GUI".
+- (You can choose your csv file use GUI and the output csv file will be generated into monthly-payslip/src folder).
 
 
 Unit Test:
