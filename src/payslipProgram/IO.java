@@ -42,7 +42,7 @@ public class IO {
 		}
 	}
 	
-	public void FileWriter(String outputFile) {
+	public boolean FileWriter(String outputFile) {
 		try {
 			FileWriter fw = new FileWriter(outputFile);
 			BufferedWriter bw = new BufferedWriter(fw);
@@ -75,10 +75,12 @@ public class IO {
 				bw.newLine();
 			}
 			bw.close();
+			return true;
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
+			return false;
 		}
 	}
 

@@ -9,15 +9,17 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class GUI implements ActionListener {
 	
 	String filePath = "";
 	String outputFile = "src/payslip-output.csv";
+	JFrame frame;
 	
 	public GUI() {
-		JFrame frame = new JFrame("Montly Payslip Program");
+		frame = new JFrame("Montly Payslip Program");
 	    JPanel panel = new JPanel();
 	    JButton button = new JButton("Select a csv file");
 	    
@@ -50,8 +52,20 @@ public class GUI implements ActionListener {
 			IO io = new IO();
 			io.FileReader(filePath);
 			//output
-			io.FileWriter(outputFile);
-			System.out.println("Finished!");
+			boolean result = io.FileWriter(outputFile);
+			if(result) {
+				JOptionPane.showMessageDialog(frame,
+					    "The csv file has been generated in monthly-payslip/src folder",
+					    "The output:",
+					    JOptionPane.PLAIN_MESSAGE);
+				System.out.println("Finished!");
+			} else {
+				JOptionPane.showMessageDialog(frame,
+					    "Something went wrong!",
+					    "The output:",
+					    JOptionPane.PLAIN_MESSAGE);
+				System.out.println("Failed!");
+			}
 		}
 		
 	}
