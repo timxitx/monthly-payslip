@@ -6,6 +6,7 @@ The assumptions:
 - The number of working days each month is the same, and there is no any sick leave or annual leave.
 - The start date is a range of current month like the example shows.
 - In csv file, you should only put numbers in super column. The salary and super can be "double" type.
+- In inputFile.csv, the first row is heaadings, the read function starts from the second row. Left aligned as well.(The sample inputFile.csv is located in src folder)
 
 
 To run it:
