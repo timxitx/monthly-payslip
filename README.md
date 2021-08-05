@@ -53,6 +53,9 @@ How to run it:
   }
 ]
 
+Assumption:
+- The threshold json import should have income from low to high, fromIncome should be less than toIncome for each element and there is no gap between different thresholds
+- The tax threshold json import should have the large enough amount for the last toIncome and the first fromIncome should be 0
 
 
 About Deploy: 
