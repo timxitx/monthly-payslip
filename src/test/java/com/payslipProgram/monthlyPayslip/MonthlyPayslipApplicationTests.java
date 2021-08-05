@@ -2,20 +2,25 @@ package com.payslipProgram.monthlyPayslip;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.payslipProgram.monthlyPayslip.domain.PaySlip;
+import com.payslipProgram.monthlyPayslip.domain.Threshold;
 
 @SpringBootTest
 class MonthlyPayslipApplicationTests {
+	
+	List<Threshold> taxThresholds = new ArrayList<Threshold>();
 	
 	PaySlip payslip1 = new PaySlip();
 	PaySlip payslip2 = new PaySlip();
 	PaySlip payslip3 = new PaySlip();
 	PaySlip payslip4 = new PaySlip();
 	PaySlip payslip5 = new PaySlip();
-
 	
 	@Test
 	void grossIncomeTest() {
@@ -30,16 +35,28 @@ class MonthlyPayslipApplicationTests {
 	
 	@Test
 	void incomeTaxTest() {
-		payslip1.setIncomeTax(10000);
-		payslip2.setIncomeTax(25000);
-		payslip3.setIncomeTax(60050);
-		payslip4.setIncomeTax(120000);
-		payslip5.setIncomeTax(300000);
+		Threshold tt1 = new Threshold(0, 20000, 0);
+		Threshold tt2 = new Threshold(20001, 30000, 0.21);
+		Threshold tt3 = new Threshold(30001, 50000, 0.382);
+		Threshold tt4 = new Threshold(50001, 120000, 0.44);
+		Threshold tt5 = new Threshold(120001, Integer.MAX_VALUE, 0.57);
+		taxThresholds.add(tt1);
+		taxThresholds.add(tt2);
+		taxThresholds.add(tt3);
+		taxThresholds.add(tt4);
+		taxThresholds.add(tt5);
+		
+		payslip1.setIncomeTax(10000, taxThresholds);
+		payslip2.setIncomeTax(25000, taxThresholds);
+		payslip3.setIncomeTax(42000, taxThresholds);
+		payslip4.setIncomeTax(110000, taxThresholds);
+		payslip5.setIncomeTax(300000, taxThresholds);
+		
 		assertEquals(0, payslip1.getIncomeTax());
-		assertEquals(108, payslip2.getIncomeTax());
-		assertEquals(922, payslip3.getIncomeTax());
-		assertEquals(2669, payslip4.getIncomeTax());
-		assertEquals(9019, payslip5.getIncomeTax());
+		assertEquals(87, payslip2.getIncomeTax());
+		assertEquals(557, payslip3.getIncomeTax());
+		assertEquals(3012, payslip4.getIncomeTax());
+		assertEquals(11928, payslip5.getIncomeTax());
 	}
 	
 	@Test

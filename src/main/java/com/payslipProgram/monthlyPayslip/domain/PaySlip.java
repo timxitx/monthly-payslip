@@ -2,6 +2,7 @@ package com.payslipProgram.monthlyPayslip.domain;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 public class PaySlip {
 
@@ -14,16 +15,8 @@ public class PaySlip {
 	private String fromDate;
 	private String toDate;
 	
-	double taxRate1 = 0.19;
-	double taxRate2 = 0.325;
-	double taxRate3 = 0.37;
-	double taxRate4 = 0.45;
-	double taxBase = 0;
-	
-	int taxThreshold1 = 18200;
-	int taxThreshold2 = 37000;
-	int taxThreshold3 = 87000;
-	int taxThreshold4 = 180000;
+	double taxBase;
+
 
 	public Integer getGrossIncome() {
 		return grossIncome;
@@ -37,20 +30,14 @@ public class PaySlip {
 		return incomeTax;
 	}
 
-	public void setIncomeTax(double salary) {
-		if(salary >= taxThreshold4 + 1) {
-			taxBase = ((taxThreshold2 - taxThreshold1 - 1)*taxRate1) + ((taxThreshold3 - taxThreshold2 - 1)*taxRate2) + ((taxThreshold4 - taxThreshold3 - 1)*taxRate3);
-			this.incomeTax = (int) Math.round((taxBase+(salary - taxThreshold4 - 1)*taxRate4)/12);
-		} else if (salary >= taxThreshold3 + 1 && salary < taxThreshold4) {
-			taxBase = ((taxThreshold2 - taxThreshold1 - 1)*taxRate1) + ((taxThreshold3 - taxThreshold2 - 1)*taxRate2);
-			this.incomeTax = (int) Math.round((taxBase+(salary - taxThreshold3 - 1)*taxRate3)/12);
-		} else if (salary >= taxThreshold2 + 1 && salary < taxThreshold3) {
-			taxBase = (taxThreshold2 - taxThreshold1 - 1)*taxRate1;
-			this.incomeTax = (int) Math.round((taxBase+(salary - taxThreshold2 - 1)*taxRate2)/12);
-		} else if (salary >= taxThreshold1 + 1 && salary < taxThreshold2 ) {
-			this.incomeTax = (int) Math.round((salary- taxThreshold1 - 1)*taxRate1/12);
-		} else {
-			this.incomeTax = 0;
+	public void setIncomeTax(double salary, List<Threshold> tts) {
+		taxBase = 0;
+		for(Threshold tt: tts) {
+			if(salary >= tt.getFromIncome() && salary<tt.getToIncome()) {
+				this.incomeTax = (int) Math.round((taxBase + tt.getTaxInRange(salary))/12);
+				break;
+			}
+			taxBase += (tt.getToIncome() - tt.getFromIncome())*tt.getTaxRate();
 		}
 	}
 

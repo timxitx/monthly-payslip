@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.payslipProgram.monthlyPayslip.domain.Employee;
 import com.payslipProgram.monthlyPayslip.domain.PaySlip;
+import com.payslipProgram.monthlyPayslip.domain.Threshold;
 import com.payslipProgram.monthlyPayslip.service.EmployeeService;
 
 @RestController
@@ -31,6 +32,18 @@ public class MainController {
 	public List<PaySlip> input(@RequestBody List<Employee> e) {
 		return employeeService.output(e);
 	}
+	
+	@PostMapping("/import-tax-threshold")
+	public String getTaxThreshold(@RequestBody List<Threshold> tt) {
+		try {
+			employeeService.assignTaxThreshold(tt);
+			return "New Tax Threshold has been set!";
+		} catch(Exception e) {
+			e.printStackTrace();
+			return "something went wrong.";
+		}
+	}
+	
 	
 	
 }
