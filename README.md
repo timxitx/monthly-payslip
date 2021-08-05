@@ -2,12 +2,40 @@
 
 This is a monthly payslip application
 
-It has been published to 18.188.234.249:8080
+It has been published to 3.21.40.161:8080
 
 
 How to run it:
-- Open postman, use POST method to "18.188.234.249:8080/input" and select application.json
-- it will return the response when it is given the input like the following
+- Open postman, select POST method and select application.json.
+- (Optional, it has default value) put "3.21.40.161:8080/import-tax-threshold" and the JSON like the following
+- [
+  {
+    "fromIncome":0,
+    "toIncome":18200,
+    "taxRate":0
+  },
+  {
+    "fromIncome":18201,
+    "toIncome":37000,
+    "taxRate":0.19
+  },
+  {
+    "fromIncome":37001,
+    "toIncome":87000,
+    "taxRate":0.325
+  },
+  {
+    "fromIncome":87001,
+    "toIncome":180000,
+    "taxRate":0.37
+  },
+  {
+    "fromIncome":180001,
+    "toIncome":999999999,
+    "taxRate":0.45
+  }
+]
+- put "3.21.40.161:8080/input" and the JSON like the following
 - [
   {
   	"firstName":"David",
