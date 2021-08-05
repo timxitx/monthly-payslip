@@ -31,4 +31,4 @@ About Deploy:
 - I used docker to create a docker image for this application and linked the image to aws ECS service for deploying.(https://hub.docker.com/r/timxii/monthlypayslip/tags?page=1&ordering=last_updated)
 
 About Testing: 
-- Already include the Junit Test.
+- Already included the Junit Test.
