@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class PaySlip {
+
+	private Employee employee;
 	
 	private Integer grossIncome;
 	private Integer incomeTax;
@@ -94,6 +96,14 @@ public class PaySlip {
 	    SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM");
 	    String lastDayOfMonth = sdf.format(cal.getTime());
 		this.toDate = lastDayOfMonth;
+	}
+	
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 	
 	
