@@ -25,7 +25,7 @@ public class MainController {
 	
 	@GetMapping
 	public String home() {
-		return "This is the monthly payslip application with aws cdk, the latest version.";
+		return "This is the monthly payslip application with aws cdk, and this is the home page.";
 	}
 
 	@PostMapping("/input")
