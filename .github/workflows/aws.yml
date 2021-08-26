@@ -50,11 +50,6 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
-    - name : create a ecr
-      id: create-ecr
-      run: |
-        aws ecr create-repository --repository-name monthly-payslip-with-cdk --region us-east-2
-
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
