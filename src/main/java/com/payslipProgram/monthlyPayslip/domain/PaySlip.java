@@ -14,7 +14,7 @@ public class PaySlip {
 	private Integer superannuation;
 	private String fromDate;
 	private String toDate;
-	
+	 
 	double taxBase;
 
 
